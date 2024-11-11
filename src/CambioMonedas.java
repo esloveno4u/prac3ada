@@ -26,7 +26,13 @@ public class CambioMonedas {
 					tabla[i][j] = 0;
 					opcion[i][j] = 0;
 				}else if (i == 0) {
-					
+					if(j%d[i]!=0){
+						opcion[i][j]=Integer.MAX_VALUE;
+
+					}else{
+						opcion[i][j]=j%d[i];
+
+					}
 					//***Completar***
 				
 				}else {//i> 0
