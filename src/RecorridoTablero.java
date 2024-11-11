@@ -29,7 +29,23 @@ public class RecorridoTablero {
 
 	private int resuelve(int i, int j) {
 		
-		//***Completar Implementación****
+		//***Completar Implementación***
+		if(solucion[i][j]==-1){
+			if(i==0){
+				solucion[i][j]=tablero[i][j];
+			}else if(j==0){
+				solucion[i][j]=tablero[i][j]+Math.max(resuelve(i-1,j),
+						resuelve(i-1,j+1));
+			}else if(j==m-1){
+				solucion[i][j]=tablero[i][j]+Math.max(resuelve(i-1,j),
+						resuelve(i-1,j-1));
+			}else{
+				solucion[i][j]=tablero[i][j]+maximo3(resuelve(i-1,j),
+						resuelve(i-1,j-1),
+						resuelve(i-1,j+1));
+			}
+		}
+		return solucion[i][j];
 	}
 
 	private int maximo3(int a, int b, int c) {
@@ -49,6 +65,27 @@ public class RecorridoTablero {
 		}
 		
 		//***Completar Implementación***
+		Recorrido recorrido=new Recorrido();
+		recorrido.add(fila, col);
+		int valor=solucion[fila][col]-tablero[fila][col];
+		int i=fila-1;
+		int j=col;
+		while( i>=0) {
+			if(j>0 && solucion[i][j-1]==valor) {
+				valor-=tablero[i][j-1];
+				recorrido.add(i, j-1);
+				j--;
+			}else if(j<m-1 && solucion[i][j+1]==valor){
+				valor-=tablero[i][j+1];
+				recorrido.add(i, j+1);
+				j++;
+			}else{
+				valor-=tablero[i][j];
+				recorrido.add(i, j);
+			}
+			i--;
+		}
+		return recorrido;
 	}
 
 	public void imprimeMatrizSolucion() {

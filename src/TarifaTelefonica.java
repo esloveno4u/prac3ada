@@ -15,8 +15,10 @@ public class TarifaTelefonica {
 	}
 
 	public int resolverBottomUp() {
-		
+
 		//***Completar Implementación***
+
+		return pago[estimacion.length-1];
 	}
 
 	public int[] reconstruirSol() {
@@ -25,7 +27,7 @@ public class TarifaTelefonica {
 		}
 		
 		//***Completar implementación***
-		
+		return null;
 	}
 
 	public void imprimeVectorSolucion() {
