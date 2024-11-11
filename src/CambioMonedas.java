@@ -30,7 +30,7 @@ public class CambioMonedas {
 						opcion[i][j]=Integer.MAX_VALUE;
 
 					}else{
-						opcion[i][j]=j%d[i];
+						opcion[i][j]=j/d[i];
 
 					}
 					//***Completar***
