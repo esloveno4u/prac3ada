@@ -41,7 +41,7 @@ public class TarifaTelefonica {
 
 					}
 				}else{
-					if(tarifa[i+permanencia+1]==1 || pago[i + 1] + tarifaMegas * estimacion[i] < tarifaPlana*permanencia+pago[i+permanencia]){
+					if(tarifa[i+permanencia]==1 || pago[i + 1] + tarifaMegas * estimacion[i] < tarifaPlana*permanencia+pago[i+permanencia]){
 						pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
 						tarifa[i]=0;
 					}else{
