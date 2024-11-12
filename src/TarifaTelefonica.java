@@ -26,8 +26,12 @@ public class TarifaTelefonica {
 				if(pago[i + 1] + tarifaMegas * estimacion[i]<tarifaPlana*permanencia+pago[i+permanencia]){
 					pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
 				}else{
-					for(int j=i+permanencia-1; j>=i;j--){
-						pago[j]=tarifaPlana+pago[j+1];
+					for(int j=i+permanencia; j>=i;j--){
+						if(i+permanencia==estimacion.length-1){
+							pago[j]=tarifaPlana;
+						}else{
+							pago[j]=tarifaPlana+pago[j+1];
+						}
 					}
 				}
 			}
