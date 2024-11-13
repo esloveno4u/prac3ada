@@ -1,0 +1,9 @@
+
+g	java:S112""FDefine and throw a dedicated exception instead of using a generic one.(ÕáÎüÿÿÿÿ8œ®ê¬²2
+
+java:S1659"HDeclare "permanencia" and all following declarations on a separate line.(¶ñÈùÿÿÿÿ8ùâˆ©²2J$fa81c530-ae49-4376-b114-b5b4f8a08ae3
+m	java:S1068"+Replace this use of System.out by a logger.(˜÷ª½8‚ãˆ©²2J$0ca5fc34-ad85-46e0-87d0-a18f616e26bd
+o
+java:S1144;",Remove this unused private "casoLim" method.(ÈÌ‚8ƒãˆ©²2J$0176c080-a78f-4e14-aa8b-3c3a95e490f9
+r
+java:S1144D"/Remove this unused private "casoLimite" method.(Çİªà8ƒãˆ©²2J$939e8f93-a2b6-4c98-ae4d-4381b531dee1

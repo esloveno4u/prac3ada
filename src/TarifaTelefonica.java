@@ -5,7 +5,6 @@ public class TarifaTelefonica {
 	private int tarifaPlana, permanencia, tarifaMegas;
 	private int[] estimacion;
 	private int[] pago;// Pago mínimo a realizar durante los meses de i...n
-	private int[] tarifa;
 	public TarifaTelefonica(int tp, int p, int tm, int[] est) {
 		tarifaPlana = tp;
 		permanencia = p-1;
@@ -15,65 +14,43 @@ public class TarifaTelefonica {
 	}
 
 	public int resolverBottomUp() {
-		pago = new int[estimacion.length];
-		tarifa = new int [estimacion.length];
-		//***Completar Implementación***
-		for(int i = estimacion.length-1; i>=0;i--){
-			if(i+permanencia>estimacion.length){
-				if(!casoLim(i,tarifaMegas*estimacion[i])){
-					pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
-				}
-				tarifa[i]=0;
-			}else{
-				if(casoLimite(i+permanencia)){
-					if(pago[i + 1] + tarifaMegas * estimacion[i]< tarifaPlana*permanencia){
-						pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
-						tarifa[i]=0;
-					}else{
-						for(int j=i+permanencia-1; j>=i;j--){
-							if(j==estimacion.length-1){
-								pago[j]=tarifaPlana;
-							}else{
-								pago[j]=tarifaPlana+pago[j+1];
-							}
-							tarifa[j]=1;
-						}
-
-					}
-				}else{
-					if(tarifa[i+permanencia]==1 || pago[i + 1] + tarifaMegas * estimacion[i] < tarifaPlana*permanencia+pago[i+permanencia]){
-						pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
-						tarifa[i]=0;
-					}else{
-						if(tarifa[i+permanencia]==0){
-							for(int j=i+permanencia; j>=i;j--){
-								if(j==estimacion.length-1){
-									pago[j]=tarifaPlana;
-								}else{
-									pago[j]=tarifaPlana+pago[j+1];
-								}
-								tarifa[j]=1;
-							}
-						}else{
-							pago[i] = pago[i + 1] + tarifaMegas * estimacion[i];
-							tarifa[i]=0;
-						}
-					}
-				}
-
+		//**Completar Implementación**
+		int n=estimacion.length;
+		pago=new int[n+1];
+		pago[n]=0;
+		for(int j=n-1; j>=0; j--) {
+			if(j+permanencia > n){
+				pago[j]=tarifaMegas * estimacion[j] + pago[j+1];
+			}else {
+				pago[j]=Math.min(tarifaMegas * estimacion[j] + pago[j+1], permanencia * tarifaPlana + pago[j+permanencia]);
 			}
 		}
 		return pago[0];
+
 	}
 
 	public int[] reconstruirSol() {
 		if (pago == null) {
 			throw new RuntimeException("Se debe resolver el problema primero");
 		}
-		int [] sol= new int[pago.length];
-		sol=tarifa;
-		return sol;
+		// **Completar implementación**
+		int n=estimacion.length;
+		int[] pago1 = new int[n];
+		int mes=0;
+		while(mes<n){
+			if(pago[mes]== tarifaMegas * estimacion[mes] + pago[mes+1]){
+				pago1[mes]=0;
+				mes++;
+			}else{
+				for(int j=0; j<permanencia && mes+j <n; j++){
+					pago1[mes+j]=1;
+				}
+				mes+=permanencia;
+			}
+		}
+		return pago1;
 	}
+
 
 	public void imprimeVectorSolucion() {
 		System.out.println(Arrays.toString(pago));
@@ -92,4 +69,3 @@ public class TarifaTelefonica {
 		return i>=estimacion.length-1;
 	}
 }
-//comentario random
